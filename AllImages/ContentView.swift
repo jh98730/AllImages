@@ -8,12 +8,37 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var message = ""
+    @State private var imageName = ""
+    @State private var imageNumber = 0
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            Spacer()
+            Image(imageName)
+                .resizable()
+                .scaledToFit()
+                .clipShape(RoundedRectangle(cornerRadius: 30))
+                .shadow(radius: 30)
+            Text(message)
+                .font(.largeTitle)
+                .fontWeight(.heavy)
+                .foregroundStyle(.red)
+            
+            Spacer()
+            
+            Button("Toggle Image") {
+                message = "Welcome to the Zoo"
+                if imageNumber > 9 {
+                    imageNumber = 0
+                }
+                imageName = "image\(imageNumber)"
+                
+                imageNumber += 1
+            }
+            .buttonStyle(.borderedProminent)
+            .font(.title2)
+            
         }
         .padding()
     }
